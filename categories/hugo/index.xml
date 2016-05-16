@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hugo on microcandy</title>
+    <link>http://microcandy.github.io/categories/hugo/</link>
+    <description>Recent content in Hugo on microcandy</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 16 May 2016 00:44:25 +0800</lastBuildDate>
+    <atom:link href="http://microcandy.github.io/categories/hugo/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>搭建静态博客：hugo &amp; github</title>
+      <link>http://microcandy.github.io/post/development/how-to-hugo/</link>
+      <pubDate>Mon, 16 May 2016 00:44:25 +0800</pubDate>
+      
+      <guid>http://microcandy.github.io/post/development/how-to-hugo/</guid>
+      <description>
+
+&lt;h1 id=&#34;hugo安装与使用:8ea1f7119f2c64cb61f6808a5ec342cb&#34;&gt;hugo安装与使用&lt;/h1&gt;
+
+&lt;p&gt;参照&lt;a href=&#34;https://gohugo.io/overview/quickstart/&#34;&gt;Getting Started&lt;/a&gt;进行（Windows7）&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;安装&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Save the main executable as &lt;strong&gt;hugo&lt;/strong&gt; (or &lt;strong&gt;hugo.exe&lt;/strong&gt; on Windows) somewhere in your &lt;strong&gt;PATH&lt;/strong&gt; as we will be using it in the next step.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;把下载好的hugo.exe随便放个地方，并且添加到Path中。也就是在：我的电脑-右键-属性-高级系统设置-环境变量中进行添加。&lt;/p&gt;
+
+&lt;p&gt;（假设hugo.exe我放在C:\hugo中，则在path变量中加入&lt;code&gt;;C:\hugo&lt;/code&gt;）&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;创建一个网站&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ hugo new site blog
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;项目结构具体说明看官网的&lt;a href=&#34;https://gohugo.io/overview/quickstart/&#34;&gt;Getting Started&lt;/a&gt;，生成的目录中主要用到static、content、config.toml，后续会使用网站主题&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;config.toml&lt;/strong&gt;: Every website should have a configuration file at the root.&lt;br /&gt;
+&lt;strong&gt;content&lt;/strong&gt;: This is where you will store content of the website. Inside content, you will create sub-directories for different sections.&lt;br /&gt;
+&lt;strong&gt;static&lt;/strong&gt;: This directory is used to store all the static content that your website will need like images, CSS, JavaScript or other static content.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;添加新内容&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;创建命令&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ hugo new post/how-to-hugo.md
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;期望的输出&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;xxxx\content\post\how-to-hugo.md created
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;&lt;a href=&#34;https://gohugo.io/overview/quickstart/&#34;&gt;Getting Started&lt;/a&gt;&lt;strong&gt;中提醒到：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Make sure you are inside your website directory.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;那么这个how-to-hugo.md默认应该差不多这个样子（如果使用了主题的话可能会有出入）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;+++
+date = &amp;quot;2016-05-16T00:44:25+08:00&amp;quot;
+draft = true
+title = &amp;quot;how to hugo&amp;quot;
+
++++
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后就可以写这篇文章了。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;运行&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;hugo内置了一个服务器使得我们可以在&lt;a href=&#34;http://localhost:1313/&#34;&gt;http://localhost:1313/&lt;/a&gt; 预览我们的网站&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Hugo has an inbuilt server that can serve your website content so that you can preview it.&lt;br /&gt;
+This will start the server on port 1313. You can view your blog at &lt;a href=&#34;http://localhost:1313/&#34;&gt;http://localhost:1313/&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ hugo server
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;期望中的结果是没有任何输出。因为我们新建的how-to-hugo.md是一篇草稿&lt;code&gt;raft = true&lt;/code&gt;，可以考虑设置为false（推荐），或者&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;To render drafts, re-run the server with command shown below.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ hugo server --buildDrafts
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;使用主题&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;为什么要使用主题？（本着不重复造轮子的理念、不会写前端、懒&amp;hellip;）&lt;/p&gt;
+
+&lt;p&gt;好吧，官方这说的很有道理&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Hugo currently doesn’t ship with a &lt;strong&gt;default&lt;/strong&gt; theme, allowing the user to pick whichever theme best suits their project.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;在&lt;a href=&#34;http://themes.gohugo.io/&#34;&gt;hugo主题&lt;/a&gt;里挑选喜欢的主题，点击【DEMO】可以看到预览，之后点击【HOMEPAGE】可以前往托管在Github的主题，把它下下来。&lt;/p&gt;
+
+&lt;p&gt;主题下好之后解压然后重命名成一个较短的新名字（后面本地预览时要输入主题的文件名），放在项目根目录下themes文件夹中（新建一个），之后预览带主题的网站效果。（也可以参照&lt;a href=&#34;https://gohugo.io/overview/quickstart/&#34;&gt;Getting Started&lt;/a&gt;里面用Git命令clone主题）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ hugo server --theme=theme-name --buildDrafts
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;公开&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;So far all the posts that we have written are in draft status. To make a draft public, you can either run a command or manually change the draft status in the post to True.&lt;br /&gt;
+$ hugo undraft content/post/good-to-great.md&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;噢？网页还是草稿&lt;code&gt;draft = true&lt;/code&gt;？用命令行去解决吧~&lt;/p&gt;
+
+&lt;p&gt;看起来挺麻烦，开文件手改吧。&lt;/p&gt;
+
+&lt;p&gt;现在它已经不是草稿了，可以不用&lt;code&gt;--buildDrafts&lt;/code&gt;了。（记得带上主题）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ hugo server --theme=theme-name
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;生成、部署&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;这里打算部署到Github Pages上。&lt;/p&gt;
+
+&lt;p&gt;先创建一个Repository，名为yourGithubID.github.io&lt;/p&gt;
+
+&lt;p&gt;之后生成我们的网站，生成命令就是去掉&lt;code&gt;server&lt;/code&gt;参数&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ hugo --theme=theme-name --baseUrl=&amp;quot;http://yourGithubID.github.io/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;之后会在项目根目录下生成一个public文件夹&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;After you run the hugo command, a public directory will be created with the generated website source.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;运行Git Shell，进入这个public目录下，将目录下所有文件push到刚创建的Repository的master分支（也可以考虑参照&lt;a href=&#34;https://gohugo.io/overview/quickstart/&#34;&gt;Getting Started&lt;/a&gt;新建一个分支）。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ cd public
+$ git init
+$ git remote add origin https://github.com/yourGithubID/yourGithubID.github.io.git
+$ git add -A
+$ git commit -m &amp;quot;first commit&amp;quot;
+$ git push -u origin master
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;不出意外的话，&lt;code&gt;http://yourGithubID.github.io/&lt;/code&gt; 这就是成果了。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;代码高亮&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;如果是&lt;del&gt;技术&lt;/del&gt;博客，可以考虑使用代码高亮插件，官网&lt;a href=&#34;https://highlightjs.org/&#34;&gt;点这里&lt;/a&gt;，选则需要的高亮语言然后下载。&lt;/p&gt;
+
+&lt;p&gt;根据hugo&lt;a href=&#34;https://gohugo.io/overview/quickstart/&#34;&gt;Getting Started&lt;/a&gt;的意思，这东西应该放在static目录下，假设放在static\highlight下。&lt;/p&gt;
+
+&lt;p&gt;最直接的使用方法就是（见highlight\README.MD）&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;The bare minimum for using highlight.js on a web page is linking to the library along with one of the styles and calling &lt;em&gt;initHighlightingOnLoad&lt;/em&gt;:&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/path/to/styles/default.css&amp;quot;&amp;gt;
+&amp;lt;script src=&amp;quot;/path/to/highlight.pack.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script&amp;gt;hljs.initHighlightingOnLoad();&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;我们刚刚假设我们的高亮插件放在static\highlight下，那么path/to应该换成highlight&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/highlight/styles/default.css&amp;quot;&amp;gt;
+&amp;lt;script src=&amp;quot;/highlight/highlight.pack.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script&amp;gt;hljs.initHighlightingOnLoad();&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;那么在贴代码时指定语言即可&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;    ```html  
+    &amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/highlight/styles/default.css&amp;quot;&amp;gt;  
+    ```  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;评论&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;许多主题都提供了&lt;a href=&#34;https://disqus.com/&#34;&gt;Disqus&lt;/a&gt;评论模块的接口，只需要申请帐号并且设置一下就可以使用了。提供的都是国外的社交软件，所以就放弃了。这里使用&lt;a href=&#34;http://www.uyan.cc/&#34;&gt;友言&lt;/a&gt;评论系统。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.uyan.cc/&#34;&gt;友言&lt;/a&gt;不能在本地预览中使用，只有部署到Github Pages之后才能正常使用。&lt;/p&gt;
+
+&lt;p&gt;在&lt;a href=&#34;http://www.uyan.cc/&#34;&gt;友言&lt;/a&gt;注册后直接选择获取代码-通用代码，会得到形如下面的一段代码，放在需要放的地方&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;div id=&amp;quot;uyan_frame&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+&amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;http://v2.uyan.cc/code/uyan.js?uid=一串数字&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;之后的事&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;之后就是如何好好使用主题的问题了，只能参照主题给的sample或者文档来弄了。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
