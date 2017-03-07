@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>microcandy</title>
+    <link>http://microcandy.github.io/categories/gulp/index.xml</link>
+    <description>Recent content on microcandy</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://microcandy.github.io/categories/gulp/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>hugo blog工程重构</title>
+      <link>http://microcandy.github.io/post/development/refactor-blog/</link>
+      <pubDate>Sat, 04 Mar 2017 18:59:44 +0800</pubDate>
+      
+      <guid>http://microcandy.github.io/post/development/refactor-blog/</guid>
+      <description>
+
+&lt;h1 id=&#34;主题样式&#34;&gt;&lt;strong&gt;主题样式&lt;/strong&gt;&lt;/h1&gt;
+
+&lt;p&gt;相对于&lt;a href=&#34;https://github.com/jpescador/hugo-future-imperfect&#34;&gt;原版主题&lt;/a&gt;修改了不少样式，其实是删了不少：&lt;/p&gt;
+
+&lt;p&gt;删掉了头像部分：在移动端太占地方，花里胡哨&lt;/p&gt;
+
+&lt;p&gt;删掉每篇文章顶部的分享栏&lt;/p&gt;
+
+&lt;p&gt;删掉左侧边栏的about栏目&lt;/p&gt;
+
+&lt;p&gt;删掉了搜索&lt;/p&gt;
+
+&lt;p&gt;部分&lt;del&gt;汉化&lt;/del&gt;&lt;/p&gt;
+
+&lt;p&gt;有一个是不少主题都有的问题：这个为例，弹出右侧菜单的时候，会有一个类似背景遮罩（&lt;code&gt;backdrop&lt;/code&gt;）的东西，监听的是&lt;code&gt;click touchend&lt;/code&gt;事件，那么在&lt;strong&gt;移动端&lt;/strong&gt;会出现，按住不放可以滑动遮罩后面的元素（这个主题的话，移动的是整个&lt;code&gt;body&lt;/code&gt;）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// Body.
+  // Event: Hide panel on body click/tap.
+  $body.on(&#39;click touchend&#39;, function(event) {
+    $this._hide(event);
+  });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;一开始打算改成监听&lt;code&gt;touchstart&lt;/code&gt;。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// Body.
+  // Event: Hide panel on body click/tap.
+  $body.on(&#39;click touchstart&#39;, function(event) {
+    $this._hide(event);
+  });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;看起来很美好，但是点击事件击穿了，点击遮罩，遮罩后的&lt;code&gt;a&lt;/code&gt;标签接收到了点击事件。其实也不是真正的击穿，因为事件监听本身就加在&lt;code&gt;body&lt;/code&gt;上的，而不是遮罩上。所以我把&lt;code&gt;body&lt;/code&gt;的监听移除了，直接加在了遮罩上&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;  // Event: Hide panel on body click/tap.
+  // $body.on(&#39;click touchstart&#39;, function(event) {
+    // $this._hide(event);
+  });
+  $(&#39;#wrapper&#39;).on(&#39;click touchstart&#39;, function(event) {
+    $this._hide(event);
+  });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;暂时没毛病&lt;/p&gt;
+
+&lt;h1 id=&#34;合并丑化&#34;&gt;&lt;strong&gt;合并丑化&lt;/strong&gt;&lt;/h1&gt;
+
+&lt;p&gt;工作中用的是&lt;a href=&#34;http://gulpjs.com/&#34;&gt;gulp&lt;/a&gt;（本篇封面），没用过&lt;a href=&#34;http://gruntjs.com/&#34;&gt;grunt&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;全局搜索了一下，在两个文件中分别引入了js和css文件，至于语法高亮的代码，暂时没合并进来。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;css&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;在&lt;code&gt;future/layout/partials/header.html&lt;/code&gt;中&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/css/google-font.css&amp;quot; /&amp;gt;
+&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/css/font-awesome.min.css&amp;quot; /&amp;gt;
+&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/css/main.css&amp;quot; /&amp;gt;
+&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/css/add-on.css&amp;quot; /&amp;gt;
+&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/css/monokai-sublime.css&amp;quot;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;js&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;在&lt;code&gt;future/layout/partials/footer.html&lt;/code&gt;中&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;script src=&amp;quot;/js/jquery.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;/js/skel.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;/js/util.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;/js/main.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;/js/backToTop.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;/js/highlight.pack.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这些&lt;code&gt;js&lt;/code&gt;文件不在&lt;code&gt;head&lt;/code&gt;标签中，而是在&lt;code&gt;body&lt;/code&gt;标签里，所以不会阻塞页面渲染。在绝大多数浏览器中都能并行下载，不过，它们必须都全部加载完才会执行，所以，这里的顺序是不能乱的，最简单的道理，库代码先于业务逻辑代码。&lt;code&gt;highlight&lt;/code&gt;是后来才引的。&lt;/p&gt;
+
+&lt;p&gt;所以，我们合并出来的js文件，也要按这个顺序合并。这里有一个不错的gulp插件：&lt;a href=&#34;https://www.npmjs.com/package/gulp-order&#34;&gt;gulp-order&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;可以让代码在合并时遵循指定的规则&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// gulpfile.js
+// 我们想要的顺序
+var jsFilePath = [
+  &#39;themes/future/static/js/jquery.min.js&#39;,
+  &#39;themes/future/static/js/skel.min.js&#39;,
+  &#39;themes/future/static/js/util.js&#39;,
+  &#39;themes/future/static/js/main.js&#39;,
+  &#39;themes/future/static/js/backToTop.js&#39;,
+  &#39;themes/future/static/js/hightlight.pack.js&#39;
+];
+
+// 合并Js
+gulp.task(&#39;js&#39;, function () {
+  return gulp.src(jsFilePath)
+    .pipe(order(jsFilePath, { base: &#39;./&#39; }))
+    .pipe(uglify())
+    .pipe(concat(&#39;script.bundle.js&#39;))
+    .pipe(gulp.dest(&#39;themes/future/static/js&#39;));
+});
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;类似的&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var cssFile = [
+  &#39;themes/future/static/css/google-font.css&#39;,
+  &#39;themes/future/static/css/font-awesome.min.css&#39;,
+  &#39;themes/future/static/css/monokai-sublime.css&#39;,
+  &#39;themes/future/static/css/main.css&#39;,
+  &#39;themes/future/static/css/add-on.css&#39;
+]
+gulp.task(&#39;css&#39;, function () {
+  return gulp.src(cssFile)
+    .pipe(order(cssFile, { base: &#39;./&#39; }))
+    .pipe(concat(&#39;style.bundle.css&#39;))
+    .pipe(minifyCss())
+    .pipe(gulp.dest(&#39;themes/future/static/css&#39;));
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最后不要忘记引入&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;!-- css --&amp;gt;
+&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/css/style.bundle.css&amp;quot; /&amp;gt;
+&amp;lt;!--&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/css/google-font.css&amp;quot; /&amp;gt;
+&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/css/font-awesome.min.css&amp;quot; /&amp;gt;
+&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/css/main.css&amp;quot; /&amp;gt;
+&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/css/add-on.css&amp;quot; /&amp;gt;
+&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/css/monokai-sublime.css&amp;quot;&amp;gt;--&amp;gt;
+
+&amp;lt;!-- js --&amp;gt;
+&amp;lt;script src=&amp;quot;/js/script.bundle.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;!--&amp;lt;script src=&amp;quot;/js/jquery.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;/js/skel.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;/js/util.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;/js/main.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;/js/backToTop.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;/js/highlight.pack.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;--&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;大概就干了这么些，可以安心写文了&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -7,7 +7,7 @@
         
         
             
-                <title>搭建静态博客：hugo &amp; github pages</title>
+                <title>hugo blog工程重构</title>
             
         
         
@@ -19,7 +19,7 @@
             <meta name="author" content="microcandy">
         
         
-            <meta name="description" content="How to hugo &amp; Github Pages.">
+            <meta name="description" content="简单地重构一下blog工程">
         
 
         
@@ -28,18 +28,18 @@
 
 
 
-<meta name="twitter:title" content="搭建静态博客：hugo &amp; github pages"/>
-<meta name="twitter:description" content="How to hugo &amp; Github Pages."/>
+<meta name="twitter:title" content="hugo blog工程重构"/>
+<meta name="twitter:description" content="简单地重构一下blog工程"/>
 
 
 
-        <meta property="og:title" content="搭建静态博客：hugo &amp; github pages" />
-<meta property="og:description" content="How to hugo &amp; Github Pages." />
+        <meta property="og:title" content="hugo blog工程重构" />
+<meta property="og:description" content="简单地重构一下blog工程" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://microcandy.github.io/post/development/how-to-hugo/" />
+<meta property="og:url" content="http://microcandy.github.io/post/development/refactor-blog/" />
 
 
-<meta property="og:updated_time" content="2016-05-16T00:44:25&#43;08:00"/>
+<meta property="og:updated_time" content="2017-03-04T18:59:44&#43;08:00"/>
 
 
 
@@ -51,12 +51,12 @@
 
 
         
-<meta itemprop="name" content="搭建静态博客：hugo &amp; github pages">
-<meta itemprop="description" content="How to hugo &amp; Github Pages.">
+<meta itemprop="name" content="hugo blog工程重构">
+<meta itemprop="description" content="简单地重构一下blog工程">
 
 
-<meta itemprop="dateModified" content="2016-05-16T00:44:25&#43;08:00" />
-<meta itemprop="wordCount" content="391">
+<meta itemprop="dateModified" content="2017-03-04T18:59:44&#43;08:00" />
+<meta itemprop="wordCount" content="207">
 
 
 
@@ -218,26 +218,26 @@
             
 
 
-<li><a href="http://service.weibo.com/share/share.php?url=http%3a%2f%2fmicrocandy.github.io%2fpost%2fdevelopment%2fhow-to-hugo%2f&title=%e6%90%ad%e5%bb%ba%e9%9d%99%e6%80%81%e5%8d%9a%e5%ae%a2%ef%bc%9ahugo%20%26%20github%20pages&pic=http://tolove.date/apple-touch-icon.png" target="_blank" class="share-btn facebook">
+<li><a href="http://service.weibo.com/share/share.php?url=http%3a%2f%2fmicrocandy.github.io%2fpost%2fdevelopment%2frefactor-blog%2f&title=hugo%20blog%e5%b7%a5%e7%a8%8b%e9%87%8d%e6%9e%84&pic=http://tolove.date/apple-touch-icon.png" target="_blank" class="share-btn facebook">
     <i class="fa fa-weibo"></i>
     <p>微博</p>
 </a></li>
 
 
-<li><a href="http://share.v.t.qq.com/index.php?c=share&a=index&url=http%3a%2f%2fmicrocandy.github.io%2fpost%2fdevelopment%2fhow-to-hugo%2f&title=%e6%90%ad%e5%bb%ba%e9%9d%99%e6%80%81%e5%8d%9a%e5%ae%a2%ef%bc%9ahugo%20%26%20github%20pages" target="_blank" class="share-btn reddit">
+<li><a href="http://share.v.t.qq.com/index.php?c=share&a=index&url=http%3a%2f%2fmicrocandy.github.io%2fpost%2fdevelopment%2frefactor-blog%2f&title=hugo%20blog%e5%b7%a5%e7%a8%8b%e9%87%8d%e6%9e%84" target="_blank" class="share-btn reddit">
     <i class="fa fa-tencent-weibo"></i>
     <p>腾讯微博</p>
 </a></li>
 
 
-<li><a href="javascript:void(0);" onclick="window.open('http://connect.qq.com/widget/shareqq/index.html?url=http:\/\/microcandy.github.io\/post\/development\/how-to-hugo\/&title=搭建静态博客：hugo \x26 github pages&site=http://tolove.date&pics=http://tolove.date/apple-touch-icon.png')"
+<li><a href="javascript:void(0);" onclick="window.open('http://connect.qq.com/widget/shareqq/index.html?url=http:\/\/microcandy.github.io\/post\/development\/refactor-blog\/&title=hugo blog工程重构&site=http://tolove.date&pics=http://tolove.date/apple-touch-icon.png')"
   title="QQ" target="_blank" class="share-btn twitter">
     <i class="fa fa-qq"></i>
     <p>QQ</p>
 </a></li>
 
 
-<li><a href="javascript:void(0);" onclick="window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http:\/\/microcandy.github.io\/post\/development\/how-to-hugo\/&title=搭建静态博客：hugo \x26 github pages)" target="_blank" class="share-btn google-plus">
+<li><a href="javascript:void(0);" onclick="window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http:\/\/microcandy.github.io\/post\/development\/refactor-blog\/&title=hugo blog工程重构)" target="_blank" class="share-btn google-plus">
     <i class="fa fa-star"></i>
     <p>qq空间</p>
 </a></li>
@@ -249,7 +249,7 @@
 
 
 
-<li><a href="mailto:?subject=Check out this post by microcandy&body=http%3a%2f%2fmicrocandy.github.io%2fpost%2fdevelopment%2fhow-to-hugo%2f" target="_blank" class="share-btn email">
+<li><a href="mailto:?subject=Check out this post by microcandy&body=http%3a%2f%2fmicrocandy.github.io%2fpost%2fdevelopment%2frefactor-blog%2f" target="_blank" class="share-btn email">
     <i class="fa fa-envelope"></i>
     <p>E-mail</p>
 </a></li>
@@ -266,11 +266,11 @@
     <header>
     <div class="title">
         
-            <h1><a href="http://microcandy.github.io/post/development/how-to-hugo/">搭建静态博客：hugo &amp; github pages</a></h1>
+            <h1><a href="http://microcandy.github.io/post/development/refactor-blog/">hugo blog工程重构</a></h1>
             
         
         
-            <p>How to hugo &amp; Github Pages.</p>
+            <p>简单地重构一下blog工程</p>
         
     </div>
     <div class="meta">
@@ -279,8 +279,8 @@
         
 
         <time class="published"
-            datetime='2016-05-16'>
-            May 16, 2016</time>
+            datetime='2017-03-04'>
+            March 4, 2017</time>
         <span class="author">microcandy</span>
         
         
@@ -306,8 +306,8 @@
 
         
 
-        <a href="http://microcandy.github.io/post/development/how-to-hugo/" class="image featured">
-            <img src="/img/2016/05/how-to-hugo-01.png" alt="" />
+        <a href="http://microcandy.github.io/post/development/refactor-blog/" class="image featured">
+            <img src="/img/2017/03/refactor-blog-00.png" alt="" />
         </a>
     
 
@@ -315,218 +315,147 @@
     <div id="content">
         
 
-<h1 id="hugo安装与使用">hugo安装与使用</h1>
+<h1 id="主题样式"><strong>主题样式</strong></h1>
 
-<p>参照<a href="https://gohugo.io/overview/quickstart/">Getting Started</a>进行（Windows7）</p>
+<p>相对于<a href="https://github.com/jpescador/hugo-future-imperfect">原版主题</a>修改了不少样式，其实是删了不少：</p>
 
-<ul>
-<li><strong>安装</strong></li>
-</ul>
+<p>删掉了头像部分：在移动端太占地方，花里胡哨</p>
 
-<blockquote>
-<p>Save the main executable as <strong>hugo</strong> (or <strong>hugo.exe</strong> on Windows) somewhere in your <strong>PATH</strong> as we will be using it in the next step.</p>
-</blockquote>
+<p>删掉每篇文章顶部的分享栏</p>
 
-<p>把下载好的hugo.exe随便放个地方，并且添加到Path中。我的电脑-右键-属性-高级系统设置-环境变量中进行添加。</p>
+<p>删掉左侧边栏的about栏目</p>
 
-<p>Mac OS 则用<a href="https://brew.sh/">Homebrew</a>来安装hugo，速度还可以</p>
+<p>删掉了搜索</p>
 
-<pre><code class="language-shell">$ brew update
-$ brew install hugo
+<p>部分<del>汉化</del></p>
+
+<p>有一个是不少主题都有的问题：这个为例，弹出右侧菜单的时候，会有一个类似背景遮罩（<code>backdrop</code>）的东西，监听的是<code>click touchend</code>事件，那么在<strong>移动端</strong>会出现，按住不放可以滑动遮罩后面的元素（这个主题的话，移动的是整个<code>body</code>）</p>
+
+<pre><code class="language-javascript">// Body.
+  // Event: Hide panel on body click/tap.
+  $body.on('click touchend', function(event) {
+    $this._hide(event);
+  });
 </code></pre>
 
-<ul>
-<li><strong>创建一个网站</strong></li>
-</ul>
+<p>一开始打算改成监听<code>touchstart</code>。</p>
 
-<pre><code class="language-shell">$ hugo new site blog
+<pre><code class="language-javascript">// Body.
+  // Event: Hide panel on body click/tap.
+  $body.on('click touchstart', function(event) {
+    $this._hide(event);
+  });
 </code></pre>
 
-<p>项目结构具体说明看官网的<a href="https://gohugo.io/overview/quickstart/">Getting Started</a>，生成的目录中主要用到static、content、config.toml，后续会使用网站主题</p>
+<p>看起来很美好，但是点击事件击穿了，点击遮罩，遮罩后的<code>a</code>标签接收到了点击事件。其实也不是真正的击穿，因为事件监听本身就加在<code>body</code>上的，而不是遮罩上。所以我把<code>body</code>的监听移除了，直接加在了遮罩上</p>
 
-<blockquote>
-<p><strong>config.toml</strong>: Every website should have a configuration file at the root.<br />
-<strong>content</strong>: This is where you will store content of the website. Inside content, you will create sub-directories for different sections.<br />
-<strong>static</strong>: This directory is used to store all the static content that your website will need like images, CSS, JavaScript or other static content.</p>
-</blockquote>
-
-<ul>
-<li><strong>添加新内容</strong></li>
-</ul>
-
-<p>创建命令</p>
-
-<pre><code class="language-shell">$ hugo new post/how-to-hugo.md
+<pre><code class="language-javascript">  // Event: Hide panel on body click/tap.
+  // $body.on('click touchstart', function(event) {
+    // $this._hide(event);
+  });
+  $('#wrapper').on('click touchstart', function(event) {
+    $this._hide(event);
+  });
 </code></pre>
 
-<p>期望的输出</p>
+<p>暂时没毛病</p>
 
-<pre><code class="language-shell">xxxx/content/post/how-to-hugo.md created
+<h1 id="合并丑化"><strong>合并丑化</strong></h1>
+
+<p>工作中用的是<a href="http://gulpjs.com/">gulp</a>（本篇封面），没用过<a href="http://gruntjs.com/">grunt</a>。</p>
+
+<p>全局搜索了一下，在两个文件中分别引入了js和css文件，至于语法高亮的代码，暂时没合并进来。</p>
+
+<p><strong>css</strong></p>
+
+<p>在<code>future/layout/partials/header.html</code>中</p>
+
+<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;/css/google-font.css&quot; /&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;/css/font-awesome.min.css&quot; /&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;/css/main.css&quot; /&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;/css/add-on.css&quot; /&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;/css/monokai-sublime.css&quot;&gt;
 </code></pre>
 
-<p><strong>注意</strong><a href="https://gohugo.io/overview/quickstart/">Getting Started</a><strong>中提醒到：</strong></p>
+<p><strong>js</strong></p>
 
-<blockquote>
-<p>Make sure you are inside your website directory.</p>
-</blockquote>
+<p>在<code>future/layout/partials/footer.html</code>中</p>
 
-<p>那么这个how-to-hugo.md默认应该差不多这个样子（如果使用了主题的话可能会有出入）</p>
-
-<pre><code>+++
-date = &quot;2016-05-16T00:44:25+08:00&quot;
-draft = true
-title = &quot;how to hugo&quot;
-
-+++
+<pre><code class="language-html">&lt;script src=&quot;/js/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;/js/skel.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;/js/util.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;/js/main.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;/js/backToTop.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;/js/highlight.pack.js&quot;&gt;&lt;/script&gt;
 </code></pre>
 
-<p>然后就可以写这篇文章了。</p>
+<p>这些<code>js</code>文件不在<code>head</code>标签中，而是在<code>body</code>标签里，所以不会阻塞页面渲染。在绝大多数浏览器中都能并行下载，不过，它们必须都全部加载完才会执行，所以，这里的顺序是不能乱的，最简单的道理，库代码先于业务逻辑代码。<code>highlight</code>是后来才引的。</p>
 
-<ul>
-<li><strong>运行</strong></li>
-</ul>
+<p>所以，我们合并出来的js文件，也要按这个顺序合并。这里有一个不错的gulp插件：<a href="https://www.npmjs.com/package/gulp-order">gulp-order</a></p>
 
-<p>hugo内置了一个服务器使得我们可以在<a href="http://localhost:1313/">http://localhost:1313/</a> 预览我们的网站</p>
+<p>可以让代码在合并时遵循指定的规则</p>
 
-<blockquote>
-<p>Hugo has an inbuilt server that can serve your website content so that you can preview it.<br />
-This will start the server on port 1313. You can view your blog at <a href="http://localhost:1313/">http://localhost:1313/</a>.</p>
-</blockquote>
+<pre><code class="language-javascript">// gulpfile.js
+// 我们想要的顺序
+var jsFilePath = [
+  'themes/future/static/js/jquery.min.js',
+  'themes/future/static/js/skel.min.js',
+  'themes/future/static/js/util.js',
+  'themes/future/static/js/main.js',
+  'themes/future/static/js/backToTop.js',
+  'themes/future/static/js/hightlight.pack.js'
+];
 
-<pre><code class="language-shell">$ hugo server
+// 合并Js
+gulp.task('js', function () {
+  return gulp.src(jsFilePath)
+    .pipe(order(jsFilePath, { base: './' }))
+    .pipe(uglify())
+    .pipe(concat('script.bundle.js'))
+    .pipe(gulp.dest('themes/future/static/js'));
+});
+
 </code></pre>
 
-<p>期望中的结果是没有任何输出。因为我们新建的how-to-hugo.md是一篇草稿<code>raft = true</code>，可以考虑设置为false（推荐），或者</p>
+<p>类似的</p>
 
-<blockquote>
-<p>To render drafts, re-run the server with command shown below.</p>
-</blockquote>
-
-<pre><code class="language-shell">$ hugo server --buildDrafts
+<pre><code class="language-javascript">var cssFile = [
+  'themes/future/static/css/google-font.css',
+  'themes/future/static/css/font-awesome.min.css',
+  'themes/future/static/css/monokai-sublime.css',
+  'themes/future/static/css/main.css',
+  'themes/future/static/css/add-on.css'
+]
+gulp.task('css', function () {
+  return gulp.src(cssFile)
+    .pipe(order(cssFile, { base: './' }))
+    .pipe(concat('style.bundle.css'))
+    .pipe(minifyCss())
+    .pipe(gulp.dest('themes/future/static/css'));
+});
 </code></pre>
 
-<ul>
-<li><strong>使用主题</strong></li>
-</ul>
+<p>最后不要忘记引入</p>
 
-<p>为什么要使用主题？（本着不重复造轮子的理念、不会写前端、懒&hellip;）</p>
+<pre><code class="language-html">&lt;!-- css --&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;/css/style.bundle.css&quot; /&gt;
+&lt;!--&lt;link rel=&quot;stylesheet&quot; href=&quot;/css/google-font.css&quot; /&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;/css/font-awesome.min.css&quot; /&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;/css/main.css&quot; /&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;/css/add-on.css&quot; /&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;/css/monokai-sublime.css&quot;&gt;--&gt;
 
-<p>好吧，官方这说的很有道理</p>
-
-<blockquote>
-<p>Hugo currently doesn’t ship with a <strong>default</strong> theme, allowing the user to pick whichever theme best suits their project.</p>
-</blockquote>
-
-<p>在<a href="http://themes.gohugo.io/">hugo主题</a>里挑选喜欢的主题，点击【DEMO】可以看到预览，之后点击【HOMEPAGE】可以前往托管在Github的主题，把它下下来。</p>
-
-<p>主题下好之后解压然后重命名成一个较短的新名字（后面本地预览时要输入主题的文件名），放在项目根目录下themes文件夹中（新建一个），之后预览带主题的网站效果。（也可以参照<a href="https://gohugo.io/overview/quickstart/">Getting Started</a>里面用Git命令clone主题）</p>
-
-<pre><code class="language-shell">$ hugo server --theme=theme-name --buildDrafts
+&lt;!-- js --&gt;
+&lt;script src=&quot;/js/script.bundle.js&quot;&gt;&lt;/script&gt;
+&lt;!--&lt;script src=&quot;/js/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;/js/skel.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;/js/util.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;/js/main.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;/js/backToTop.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;/js/highlight.pack.js&quot;&gt;&lt;/script&gt;--&gt;
 </code></pre>
 
-<ul>
-<li><strong>打包</strong></li>
-</ul>
-
-<blockquote>
-<p>So far all the posts that we have written are in draft status. To make a draft public, you can either run a command or manually change the draft status in the post to True.<br />
-$ hugo undraft content/post/good-to-great.md</p>
-</blockquote>
-
-<p>噢？网页还是草稿<code>draft = true</code>？用命令行去解决吧~</p>
-
-<p>看起来挺麻烦，开文件手改吧。</p>
-
-<p>现在它已经不是草稿了，可以不用<code>--buildDrafts</code>了。（记得带上主题）</p>
-
-<pre><code class="language-shell">$ hugo server --theme=theme-name
-</code></pre>
-
-<p>静态博客生成了，你可以放到自己的私人服务器上了，什么？没有？往下看。</p>
-
-<ul>
-<li><strong>部署</strong></li>
-</ul>
-
-<p>部署到Github Pages上。</p>
-
-<p>先创建一个Repository，名为yourGithubID.github.io</p>
-
-<p>之后打包我们的网站，生成命令就是去掉<code>server</code>参数</p>
-
-<pre><code class="language-shell">$ hugo --theme=theme-name --baseUrl=http://yourGithubID.github.io/
-</code></pre>
-
-<p>之后会在项目根目录下生成一个public文件夹</p>
-
-<blockquote>
-<p>After you run the hugo command, a public directory will be created with the generated website source.</p>
-</blockquote>
-
-<p>运行Git Shell，进入这个public目录下，将目录下所有文件push到刚创建的Repository的master分支（也可以考虑参照<a href="https://gohugo.io/overview/quickstart/">Getting Started</a>新建一个分支）。</p>
-
-<pre><code class="language-shell">$ cd public
-$ git init
-$ git remote add origin https://github.com/yourGithubID/yourGithubID.github.io.git
-$ git add -A
-$ git commit -m &quot;first commit&quot;
-$ git push -u origin master
-</code></pre>
-
-<p>不出意外的话，<code>http://yourGithubID.github.io/</code> 这就是成果了。</p>
-
-<ul>
-<li><strong>代码高亮</strong></li>
-</ul>
-
-<p>如果是<del>技术</del>博客，可以考虑使用代码高亮插件，官网<a href="https://highlightjs.org/">点这里</a>，选则需要的高亮语言然后下载。</p>
-
-<p>根据hugo<a href="https://gohugo.io/overview/quickstart/">Getting Started</a>的意思，这东西应该放在static目录下，假设放在static/highlight下。</p>
-
-<p>最直接的使用方法就是（见highlight/README.MD）</p>
-
-<blockquote>
-<p>The bare minimum for using highlight.js on a web page is linking to the library along with one of the styles and calling <em>initHighlightingOnLoad</em>:</p>
-</blockquote>
-
-<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;/path/to/styles/default.css&quot;&gt;
-&lt;script src=&quot;/path/to/highlight.pack.js&quot;&gt;&lt;/script&gt;
-&lt;script&gt;hljs.initHighlightingOnLoad();&lt;/script&gt;
-</code></pre>
-
-<p>我们刚刚假设我们的高亮插件放在static/highlight下，那么path/to应该换成highlight</p>
-
-<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;/highlight/styles/default.css&quot;&gt;
-&lt;script src=&quot;/highlight/highlight.pack.js&quot;&gt;&lt;/script&gt;
-&lt;script&gt;hljs.initHighlightingOnLoad();&lt;/script&gt;
-</code></pre>
-
-<p>那么在贴代码时指定语言即可</p>
-
-<pre><code class="language-html">    ```html  
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;/highlight/styles/default.css&quot;&gt;  
-    ```  
-</code></pre>
-
-<ul>
-<li><strong>评论</strong></li>
-</ul>
-
-<p>许多主题都提供了<a href="https://disqus.com/">Disqus</a>评论模块的接口，只需要申请帐号并且设置一下就可以使用了。提供的都是国外的社交软件，所以就放弃了。这里使用<a href="http://www.uyan.cc/">友言</a>评论系统。</p>
-
-<p><a href="http://www.uyan.cc/">友言</a>不能在本地预览中使用，只有部署到Github Pages之后才能正常使用。</p>
-
-<p>在<a href="http://www.uyan.cc/">友言</a>注册后直接选择获取代码-通用代码，会得到形如下面的一段代码，放在需要放的地方</p>
-
-<pre><code class="language-html">&lt;div id=&quot;uyan_frame&quot;&gt;&lt;/div&gt;
-&lt;script type=&quot;text/javascript&quot; src=&quot;http://v2.uyan.cc/code/uyan.js?uid=一串数字&quot;&gt;&lt;/script&gt;
-</code></pre>
-
-<ul>
-<li><strong>之后的事</strong></li>
-</ul>
-
-<p>之后就是如何好好使用主题的问题了，只能参照主题给的sample或者文档来弄了。</p>
+<p>大概就干了这么些，可以安心写文了</p>
 
     </div>
 
@@ -554,7 +483,7 @@ $ git push -u origin master
     
         <li><a href='/categories/development'>Development</a></li>
     
-        <li><a href='/categories/github'>Github</a></li>
+        <li><a href='/categories/gulp'>gulp</a></li>
     
         <li><a href='/categories/hugo'>hugo</a></li>
     
@@ -568,10 +497,10 @@ $ git push -u origin master
 </article>
 <ul class="actions pagination">
     
-
+        <li><a href="http://microcandy.github.io/post/development/how-to-hugo/"
+                class="button big previous">搭建静态博客：hugo &amp; github pages</a></li>
     
-        <li><a href="http://microcandy.github.io/post/development/refactor-blog/"
-                class="button big next">hugo blog工程重构</a></li>
+
     
 </ul>
 

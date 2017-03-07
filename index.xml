@@ -2,22 +2,174 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>microcandy</title>
-    <link>http://microcandy.github.io/</link>
+    <link>http://microcandy.github.io/index.xml</link>
     <description>Recent content on microcandy</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 16 May 2016 00:44:25 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 04 Mar 2017 18:59:44 +0800</lastBuildDate>
     <atom:link href="http://microcandy.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>搭建静态博客：hugo &amp; github</title>
+      <title>hugo blog工程重构</title>
+      <link>http://microcandy.github.io/post/development/refactor-blog/</link>
+      <pubDate>Sat, 04 Mar 2017 18:59:44 +0800</pubDate>
+      
+      <guid>http://microcandy.github.io/post/development/refactor-blog/</guid>
+      <description>
+
+&lt;h1 id=&#34;主题样式&#34;&gt;&lt;strong&gt;主题样式&lt;/strong&gt;&lt;/h1&gt;
+
+&lt;p&gt;相对于&lt;a href=&#34;https://github.com/jpescador/hugo-future-imperfect&#34;&gt;原版主题&lt;/a&gt;修改了不少样式，其实是删了不少：&lt;/p&gt;
+
+&lt;p&gt;删掉了头像部分：在移动端太占地方，花里胡哨&lt;/p&gt;
+
+&lt;p&gt;删掉每篇文章顶部的分享栏&lt;/p&gt;
+
+&lt;p&gt;删掉左侧边栏的about栏目&lt;/p&gt;
+
+&lt;p&gt;删掉了搜索&lt;/p&gt;
+
+&lt;p&gt;部分&lt;del&gt;汉化&lt;/del&gt;&lt;/p&gt;
+
+&lt;p&gt;有一个是不少主题都有的问题：这个为例，弹出右侧菜单的时候，会有一个类似背景遮罩（&lt;code&gt;backdrop&lt;/code&gt;）的东西，监听的是&lt;code&gt;click touchend&lt;/code&gt;事件，那么在&lt;strong&gt;移动端&lt;/strong&gt;会出现，按住不放可以滑动遮罩后面的元素（这个主题的话，移动的是整个&lt;code&gt;body&lt;/code&gt;）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// Body.
+  // Event: Hide panel on body click/tap.
+  $body.on(&#39;click touchend&#39;, function(event) {
+    $this._hide(event);
+  });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;一开始打算改成监听&lt;code&gt;touchstart&lt;/code&gt;。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// Body.
+  // Event: Hide panel on body click/tap.
+  $body.on(&#39;click touchstart&#39;, function(event) {
+    $this._hide(event);
+  });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;看起来很美好，但是点击事件击穿了，点击遮罩，遮罩后的&lt;code&gt;a&lt;/code&gt;标签接收到了点击事件。其实也不是真正的击穿，因为事件监听本身就加在&lt;code&gt;body&lt;/code&gt;上的，而不是遮罩上。所以我把&lt;code&gt;body&lt;/code&gt;的监听移除了，直接加在了遮罩上&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;  // Event: Hide panel on body click/tap.
+  // $body.on(&#39;click touchstart&#39;, function(event) {
+    // $this._hide(event);
+  });
+  $(&#39;#wrapper&#39;).on(&#39;click touchstart&#39;, function(event) {
+    $this._hide(event);
+  });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;暂时没毛病&lt;/p&gt;
+
+&lt;h1 id=&#34;合并丑化&#34;&gt;&lt;strong&gt;合并丑化&lt;/strong&gt;&lt;/h1&gt;
+
+&lt;p&gt;工作中用的是&lt;a href=&#34;http://gulpjs.com/&#34;&gt;gulp&lt;/a&gt;（本篇封面），没用过&lt;a href=&#34;http://gruntjs.com/&#34;&gt;grunt&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;全局搜索了一下，在两个文件中分别引入了js和css文件，至于语法高亮的代码，暂时没合并进来。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;css&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;在&lt;code&gt;future/layout/partials/header.html&lt;/code&gt;中&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/css/google-font.css&amp;quot; /&amp;gt;
+&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/css/font-awesome.min.css&amp;quot; /&amp;gt;
+&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/css/main.css&amp;quot; /&amp;gt;
+&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/css/add-on.css&amp;quot; /&amp;gt;
+&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/css/monokai-sublime.css&amp;quot;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;js&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;在&lt;code&gt;future/layout/partials/footer.html&lt;/code&gt;中&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;script src=&amp;quot;/js/jquery.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;/js/skel.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;/js/util.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;/js/main.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;/js/backToTop.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;/js/highlight.pack.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这些&lt;code&gt;js&lt;/code&gt;文件不在&lt;code&gt;head&lt;/code&gt;标签中，而是在&lt;code&gt;body&lt;/code&gt;标签里，所以不会阻塞页面渲染。在绝大多数浏览器中都能并行下载，不过，它们必须都全部加载完才会执行，所以，这里的顺序是不能乱的，最简单的道理，库代码先于业务逻辑代码。&lt;code&gt;highlight&lt;/code&gt;是后来才引的。&lt;/p&gt;
+
+&lt;p&gt;所以，我们合并出来的js文件，也要按这个顺序合并。这里有一个不错的gulp插件：&lt;a href=&#34;https://www.npmjs.com/package/gulp-order&#34;&gt;gulp-order&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;可以让代码在合并时遵循指定的规则&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// gulpfile.js
+// 我们想要的顺序
+var jsFilePath = [
+  &#39;themes/future/static/js/jquery.min.js&#39;,
+  &#39;themes/future/static/js/skel.min.js&#39;,
+  &#39;themes/future/static/js/util.js&#39;,
+  &#39;themes/future/static/js/main.js&#39;,
+  &#39;themes/future/static/js/backToTop.js&#39;,
+  &#39;themes/future/static/js/hightlight.pack.js&#39;
+];
+
+// 合并Js
+gulp.task(&#39;js&#39;, function () {
+  return gulp.src(jsFilePath)
+    .pipe(order(jsFilePath, { base: &#39;./&#39; }))
+    .pipe(uglify())
+    .pipe(concat(&#39;script.bundle.js&#39;))
+    .pipe(gulp.dest(&#39;themes/future/static/js&#39;));
+});
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;类似的&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var cssFile = [
+  &#39;themes/future/static/css/google-font.css&#39;,
+  &#39;themes/future/static/css/font-awesome.min.css&#39;,
+  &#39;themes/future/static/css/monokai-sublime.css&#39;,
+  &#39;themes/future/static/css/main.css&#39;,
+  &#39;themes/future/static/css/add-on.css&#39;
+]
+gulp.task(&#39;css&#39;, function () {
+  return gulp.src(cssFile)
+    .pipe(order(cssFile, { base: &#39;./&#39; }))
+    .pipe(concat(&#39;style.bundle.css&#39;))
+    .pipe(minifyCss())
+    .pipe(gulp.dest(&#39;themes/future/static/css&#39;));
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最后不要忘记引入&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;!-- css --&amp;gt;
+&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/css/style.bundle.css&amp;quot; /&amp;gt;
+&amp;lt;!--&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/css/google-font.css&amp;quot; /&amp;gt;
+&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/css/font-awesome.min.css&amp;quot; /&amp;gt;
+&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/css/main.css&amp;quot; /&amp;gt;
+&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/css/add-on.css&amp;quot; /&amp;gt;
+&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/css/monokai-sublime.css&amp;quot;&amp;gt;--&amp;gt;
+
+&amp;lt;!-- js --&amp;gt;
+&amp;lt;script src=&amp;quot;/js/script.bundle.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;!--&amp;lt;script src=&amp;quot;/js/jquery.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;/js/skel.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;/js/util.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;/js/main.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;/js/backToTop.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;/js/highlight.pack.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;--&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;大概就干了这么些，可以安心写文了&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>搭建静态博客：hugo &amp; github pages</title>
       <link>http://microcandy.github.io/post/development/how-to-hugo/</link>
       <pubDate>Mon, 16 May 2016 00:44:25 +0800</pubDate>
       
       <guid>http://microcandy.github.io/post/development/how-to-hugo/</guid>
       <description>
 
-&lt;h1 id=&#34;hugo安装与使用:8ea1f7119f2c64cb61f6808a5ec342cb&#34;&gt;hugo安装与使用&lt;/h1&gt;
+&lt;h1 id=&#34;hugo安装与使用&#34;&gt;hugo安装与使用&lt;/h1&gt;
 
 &lt;p&gt;参照&lt;a href=&#34;https://gohugo.io/overview/quickstart/&#34;&gt;Getting Started&lt;/a&gt;进行（Windows7）&lt;/p&gt;
 
@@ -29,9 +181,13 @@
 &lt;p&gt;Save the main executable as &lt;strong&gt;hugo&lt;/strong&gt; (or &lt;strong&gt;hugo.exe&lt;/strong&gt; on Windows) somewhere in your &lt;strong&gt;PATH&lt;/strong&gt; as we will be using it in the next step.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;把下载好的hugo.exe随便放个地方，并且添加到Path中。也就是在：我的电脑-右键-属性-高级系统设置-环境变量中进行添加。&lt;/p&gt;
+&lt;p&gt;把下载好的hugo.exe随便放个地方，并且添加到Path中。我的电脑-右键-属性-高级系统设置-环境变量中进行添加。&lt;/p&gt;
 
-&lt;p&gt;（假设hugo.exe我放在C:\hugo中，则在path变量中加入&lt;code&gt;;C:\hugo&lt;/code&gt;）&lt;/p&gt;
+&lt;p&gt;Mac OS 则用&lt;a href=&#34;https://brew.sh/&#34;&gt;Homebrew&lt;/a&gt;来安装hugo，速度还可以&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ brew update
+$ brew install hugo
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;创建一个网站&lt;/strong&gt;&lt;/li&gt;
@@ -59,7 +215,7 @@
 
 &lt;p&gt;期望的输出&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;xxxx\content\post\how-to-hugo.md created
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;xxxx/content/post/how-to-hugo.md created
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;&lt;a href=&#34;https://gohugo.io/overview/quickstart/&#34;&gt;Getting Started&lt;/a&gt;&lt;strong&gt;中提醒到：&lt;/strong&gt;&lt;/p&gt;
@@ -112,9 +268,7 @@ This will start the server on port 1313. You can view your blog at &lt;a href=&#
 &lt;p&gt;好吧，官方这说的很有道理&lt;/p&gt;
 
 &lt;blockquote&gt;
-&lt;blockquote&gt;
 &lt;p&gt;Hugo currently doesn’t ship with a &lt;strong&gt;default&lt;/strong&gt; theme, allowing the user to pick whichever theme best suits their project.&lt;/p&gt;
-&lt;/blockquote&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;在&lt;a href=&#34;http://themes.gohugo.io/&#34;&gt;hugo主题&lt;/a&gt;里挑选喜欢的主题，点击【DEMO】可以看到预览，之后点击【HOMEPAGE】可以前往托管在Github的主题，把它下下来。&lt;/p&gt;
@@ -125,7 +279,7 @@ This will start the server on port 1313. You can view your blog at &lt;a href=&#
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;公开&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;打包&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;blockquote&gt;
@@ -142,17 +296,19 @@ $ hugo undraft content/post/good-to-great.md&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ hugo server --theme=theme-name
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;p&gt;静态博客生成了，你可以放到自己的私人服务器上了，什么？没有？往下看。&lt;/p&gt;
+
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;生成、部署&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;部署&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;这里打算部署到Github Pages上。&lt;/p&gt;
+&lt;p&gt;部署到Github Pages上。&lt;/p&gt;
 
 &lt;p&gt;先创建一个Repository，名为yourGithubID.github.io&lt;/p&gt;
 
-&lt;p&gt;之后生成我们的网站，生成命令就是去掉&lt;code&gt;server&lt;/code&gt;参数&lt;/p&gt;
+&lt;p&gt;之后打包我们的网站，生成命令就是去掉&lt;code&gt;server&lt;/code&gt;参数&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ hugo --theme=theme-name --baseUrl=&amp;quot;http://yourGithubID.github.io/
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ hugo --theme=theme-name --baseUrl=http://yourGithubID.github.io/
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;之后会在项目根目录下生成一个public文件夹&lt;/p&gt;
@@ -179,9 +335,9 @@ $ git push -u origin master
 
 &lt;p&gt;如果是&lt;del&gt;技术&lt;/del&gt;博客，可以考虑使用代码高亮插件，官网&lt;a href=&#34;https://highlightjs.org/&#34;&gt;点这里&lt;/a&gt;，选则需要的高亮语言然后下载。&lt;/p&gt;
 
-&lt;p&gt;根据hugo&lt;a href=&#34;https://gohugo.io/overview/quickstart/&#34;&gt;Getting Started&lt;/a&gt;的意思，这东西应该放在static目录下，假设放在static\highlight下。&lt;/p&gt;
+&lt;p&gt;根据hugo&lt;a href=&#34;https://gohugo.io/overview/quickstart/&#34;&gt;Getting Started&lt;/a&gt;的意思，这东西应该放在static目录下，假设放在static/highlight下。&lt;/p&gt;
 
-&lt;p&gt;最直接的使用方法就是（见highlight\README.MD）&lt;/p&gt;
+&lt;p&gt;最直接的使用方法就是（见highlight/README.MD）&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;The bare minimum for using highlight.js on a web page is linking to the library along with one of the styles and calling &lt;em&gt;initHighlightingOnLoad&lt;/em&gt;:&lt;/p&gt;
@@ -192,7 +348,7 @@ $ git push -u origin master
 &amp;lt;script&amp;gt;hljs.initHighlightingOnLoad();&amp;lt;/script&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;我们刚刚假设我们的高亮插件放在static\highlight下，那么path/to应该换成highlight&lt;/p&gt;
+&lt;p&gt;我们刚刚假设我们的高亮插件放在static/highlight下，那么path/to应该换成highlight&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/highlight/styles/default.css&amp;quot;&amp;gt;
 &amp;lt;script src=&amp;quot;/highlight/highlight.pack.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
@@ -229,44 +385,24 @@ $ git push -u origin master
     </item>
     
     <item>
-      <title>Qucik-Cocos2d-x环境搭建(测试页)</title>
-      <link>http://microcandy.github.io/post/game/game-test-page/</link>
-      <pubDate>Sun, 15 May 2016 02:32:43 +0800</pubDate>
-      
-      <guid>http://microcandy.github.io/post/game/game-test-page/</guid>
-      <description>
-
-&lt;h1 id=&#34;qucik-cocos2d-x环境搭建:ebd8d8de486883f911e543de429d5f24&#34;&gt;Qucik-Cocos2d-x环境搭建&lt;/h1&gt;
-
-&lt;p&gt;啦啦啦啦啦&lt;/p&gt;
-
-&lt;p&gt;啦啦啦啦啦&lt;/p&gt;
-
-&lt;p&gt;啦啦啦&lt;/p&gt;
-
-&lt;p&gt;哦&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>welcome!</title>
+      <title>microcandy&#39;s blog!</title>
       <link>http://microcandy.github.io/other/about/</link>
       <pubDate>Sat, 14 May 2016 16:58:54 +0800</pubDate>
       
       <guid>http://microcandy.github.io/other/about/</guid>
       <description>
 
-&lt;p&gt;&lt;img src=&#34;http://microcandy.github.io/logo_tolove.png&#34; alt=&#34;logo&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://microcandy.github.io/logo_tolove.jpg&#34; alt=&#34;logo&#34; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;自黑:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;自黑：&lt;/h2&gt;
+&lt;h2 id=&#34;自黑&#34;&gt;自黑：&lt;/h2&gt;
 
 &lt;ul&gt;
-&lt;li&gt;误入码界、码渣一枚&lt;/li&gt;
-&lt;li&gt;不会画画、长跪矢吹大湿&lt;/li&gt;
-&lt;li&gt;游戏是很好玩、奈何手残被教育&lt;/li&gt;
+&lt;li&gt;前端码渣一枚，暂时写ionic1，还不会ES6&lt;/li&gt;
+&lt;li&gt;长跪矢吹大湿&lt;/li&gt;
+&lt;li&gt;游戏打得跟屎一样，指点江山一套一套的；建议加大投入以提高游戏体验&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;联系:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;联系：&lt;/h2&gt;
+&lt;h2 id=&#34;联系&#34;&gt;联系：&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;QQ：10665144&lt;/li&gt;
@@ -274,10 +410,10 @@ $ git push -u origin master
 &lt;li&gt;E-mail：microcandy@foxmail.com&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;相关:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;相关：&lt;/h2&gt;
+&lt;h2 id=&#34;其他&#34;&gt;其他：&lt;/h2&gt;
 
 &lt;ul&gt;
-&lt;li&gt;上面的符号拼图用&lt;a href=&#34;http://ascgendotnet.jmsoftware.co.uk/&#34;&gt;Ascgen dotNET&lt;/a&gt;生成&lt;/li&gt;
+&lt;li&gt;上面的符号拼图用&lt;a href=&#34;http://ascgendotnet.jmsoftware.co.uk/&#34;&gt;Ascgen dotNET&lt;/a&gt;生成，用&lt;a href=&#34;http://zhitu.isux.us/&#34;&gt;智图&lt;/a&gt;压缩&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>

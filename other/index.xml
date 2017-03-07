@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Others on microcandy</title>
-    <link>http://microcandy.github.io/other/</link>
-    <description>Recent content in Others on microcandy</description>
+    <title>Other-rsses on microcandy</title>
+    <link>http://microcandy.github.io/other/index.xml</link>
+    <description>Recent content in Other-rsses on microcandy</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 14 May 2016 16:58:54 +0800</lastBuildDate>
     <atom:link href="http://microcandy.github.io/other/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>welcome!</title>
+      <title>microcandy&#39;s blog!</title>
       <link>http://microcandy.github.io/other/about/</link>
       <pubDate>Sat, 14 May 2016 16:58:54 +0800</pubDate>
       
       <guid>http://microcandy.github.io/other/about/</guid>
       <description>
 
-&lt;p&gt;&lt;img src=&#34;http://microcandy.github.io/logo_tolove.png&#34; alt=&#34;logo&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://microcandy.github.io/logo_tolove.jpg&#34; alt=&#34;logo&#34; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;自黑:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;自黑：&lt;/h2&gt;
+&lt;h2 id=&#34;自黑&#34;&gt;自黑：&lt;/h2&gt;
 
 &lt;ul&gt;
-&lt;li&gt;误入码界、码渣一枚&lt;/li&gt;
-&lt;li&gt;不会画画、长跪矢吹大湿&lt;/li&gt;
-&lt;li&gt;游戏是很好玩、奈何手残被教育&lt;/li&gt;
+&lt;li&gt;前端码渣一枚，暂时写ionic1，还不会ES6&lt;/li&gt;
+&lt;li&gt;长跪矢吹大湿&lt;/li&gt;
+&lt;li&gt;游戏打得跟屎一样，指点江山一套一套的；建议加大投入以提高游戏体验&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;联系:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;联系：&lt;/h2&gt;
+&lt;h2 id=&#34;联系&#34;&gt;联系：&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;QQ：10665144&lt;/li&gt;
@@ -35,10 +35,10 @@
 &lt;li&gt;E-mail：microcandy@foxmail.com&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;相关:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;相关：&lt;/h2&gt;
+&lt;h2 id=&#34;其他&#34;&gt;其他：&lt;/h2&gt;
 
 &lt;ul&gt;
-&lt;li&gt;上面的符号拼图用&lt;a href=&#34;http://ascgendotnet.jmsoftware.co.uk/&#34;&gt;Ascgen dotNET&lt;/a&gt;生成&lt;/li&gt;
+&lt;li&gt;上面的符号拼图用&lt;a href=&#34;http://ascgendotnet.jmsoftware.co.uk/&#34;&gt;Ascgen dotNET&lt;/a&gt;生成，用&lt;a href=&#34;http://zhitu.isux.us/&#34;&gt;智图&lt;/a&gt;压缩&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>

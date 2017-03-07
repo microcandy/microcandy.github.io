@@ -75,18 +75,18 @@
 		});
 
 		// Menu.
-			/*$menu
-				.appendTo($body)
-				.panel({
-					delay: 500,
-					hideOnClick: true,
-					hideOnSwipe: true,
-					resetScroll: true,
-					resetForms: true,
-					side: 'right',
-					target: $body,
-					visibleClass: 'is-menu-visible'
-				});*/
+			// $menu
+			// 	.appendTo($body)
+			// 	.panel({
+			// 		delay: 500,
+			// 		hideOnClick: true,
+			// 		hideOnSwipe: true,
+			// 		resetScroll: true,
+			// 		resetForms: true,
+			// 		side: 'right',
+			// 		target: $body,
+			// 		visibleClass: 'is-menu-visible'
+			// 	});
 
 		// Search (header).
 			var $search = $('#search'),

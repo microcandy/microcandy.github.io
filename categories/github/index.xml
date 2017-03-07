@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Github on microcandy</title>
-    <link>http://microcandy.github.io/categories/github/</link>
-    <description>Recent content in Github on microcandy</description>
+    <title>microcandy</title>
+    <link>http://microcandy.github.io/categories/github/index.xml</link>
+    <description>Recent content on microcandy</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 16 May 2016 00:44:25 +0800</lastBuildDate>
     <atom:link href="http://microcandy.github.io/categories/github/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>搭建静态博客：hugo &amp; github</title>
+      <title>搭建静态博客：hugo &amp; github pages</title>
       <link>http://microcandy.github.io/post/development/how-to-hugo/</link>
       <pubDate>Mon, 16 May 2016 00:44:25 +0800</pubDate>
       
       <guid>http://microcandy.github.io/post/development/how-to-hugo/</guid>
       <description>
 
-&lt;h1 id=&#34;hugo安装与使用:8ea1f7119f2c64cb61f6808a5ec342cb&#34;&gt;hugo安装与使用&lt;/h1&gt;
+&lt;h1 id=&#34;hugo安装与使用&#34;&gt;hugo安装与使用&lt;/h1&gt;
 
 &lt;p&gt;参照&lt;a href=&#34;https://gohugo.io/overview/quickstart/&#34;&gt;Getting Started&lt;/a&gt;进行（Windows7）&lt;/p&gt;
 
@@ -29,9 +28,13 @@
 &lt;p&gt;Save the main executable as &lt;strong&gt;hugo&lt;/strong&gt; (or &lt;strong&gt;hugo.exe&lt;/strong&gt; on Windows) somewhere in your &lt;strong&gt;PATH&lt;/strong&gt; as we will be using it in the next step.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;把下载好的hugo.exe随便放个地方，并且添加到Path中。也就是在：我的电脑-右键-属性-高级系统设置-环境变量中进行添加。&lt;/p&gt;
+&lt;p&gt;把下载好的hugo.exe随便放个地方，并且添加到Path中。我的电脑-右键-属性-高级系统设置-环境变量中进行添加。&lt;/p&gt;
 
-&lt;p&gt;（假设hugo.exe我放在C:\hugo中，则在path变量中加入&lt;code&gt;;C:\hugo&lt;/code&gt;）&lt;/p&gt;
+&lt;p&gt;Mac OS 则用&lt;a href=&#34;https://brew.sh/&#34;&gt;Homebrew&lt;/a&gt;来安装hugo，速度还可以&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ brew update
+$ brew install hugo
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;创建一个网站&lt;/strong&gt;&lt;/li&gt;
@@ -59,7 +62,7 @@
 
 &lt;p&gt;期望的输出&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;xxxx\content\post\how-to-hugo.md created
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;xxxx/content/post/how-to-hugo.md created
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;&lt;a href=&#34;https://gohugo.io/overview/quickstart/&#34;&gt;Getting Started&lt;/a&gt;&lt;strong&gt;中提醒到：&lt;/strong&gt;&lt;/p&gt;
@@ -112,9 +115,7 @@ This will start the server on port 1313. You can view your blog at &lt;a href=&#
 &lt;p&gt;好吧，官方这说的很有道理&lt;/p&gt;
 
 &lt;blockquote&gt;
-&lt;blockquote&gt;
 &lt;p&gt;Hugo currently doesn’t ship with a &lt;strong&gt;default&lt;/strong&gt; theme, allowing the user to pick whichever theme best suits their project.&lt;/p&gt;
-&lt;/blockquote&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;在&lt;a href=&#34;http://themes.gohugo.io/&#34;&gt;hugo主题&lt;/a&gt;里挑选喜欢的主题，点击【DEMO】可以看到预览，之后点击【HOMEPAGE】可以前往托管在Github的主题，把它下下来。&lt;/p&gt;
@@ -125,7 +126,7 @@ This will start the server on port 1313. You can view your blog at &lt;a href=&#
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;公开&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;打包&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;blockquote&gt;
@@ -142,17 +143,19 @@ $ hugo undraft content/post/good-to-great.md&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ hugo server --theme=theme-name
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;p&gt;静态博客生成了，你可以放到自己的私人服务器上了，什么？没有？往下看。&lt;/p&gt;
+
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;生成、部署&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;部署&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;这里打算部署到Github Pages上。&lt;/p&gt;
+&lt;p&gt;部署到Github Pages上。&lt;/p&gt;
 
 &lt;p&gt;先创建一个Repository，名为yourGithubID.github.io&lt;/p&gt;
 
-&lt;p&gt;之后生成我们的网站，生成命令就是去掉&lt;code&gt;server&lt;/code&gt;参数&lt;/p&gt;
+&lt;p&gt;之后打包我们的网站，生成命令就是去掉&lt;code&gt;server&lt;/code&gt;参数&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ hugo --theme=theme-name --baseUrl=&amp;quot;http://yourGithubID.github.io/
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ hugo --theme=theme-name --baseUrl=http://yourGithubID.github.io/
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;之后会在项目根目录下生成一个public文件夹&lt;/p&gt;
@@ -179,9 +182,9 @@ $ git push -u origin master
 
 &lt;p&gt;如果是&lt;del&gt;技术&lt;/del&gt;博客，可以考虑使用代码高亮插件，官网&lt;a href=&#34;https://highlightjs.org/&#34;&gt;点这里&lt;/a&gt;，选则需要的高亮语言然后下载。&lt;/p&gt;
 
-&lt;p&gt;根据hugo&lt;a href=&#34;https://gohugo.io/overview/quickstart/&#34;&gt;Getting Started&lt;/a&gt;的意思，这东西应该放在static目录下，假设放在static\highlight下。&lt;/p&gt;
+&lt;p&gt;根据hugo&lt;a href=&#34;https://gohugo.io/overview/quickstart/&#34;&gt;Getting Started&lt;/a&gt;的意思，这东西应该放在static目录下，假设放在static/highlight下。&lt;/p&gt;
 
-&lt;p&gt;最直接的使用方法就是（见highlight\README.MD）&lt;/p&gt;
+&lt;p&gt;最直接的使用方法就是（见highlight/README.MD）&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;The bare minimum for using highlight.js on a web page is linking to the library along with one of the styles and calling &lt;em&gt;initHighlightingOnLoad&lt;/em&gt;:&lt;/p&gt;
@@ -192,7 +195,7 @@ $ git push -u origin master
 &amp;lt;script&amp;gt;hljs.initHighlightingOnLoad();&amp;lt;/script&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;我们刚刚假设我们的高亮插件放在static\highlight下，那么path/to应该换成highlight&lt;/p&gt;
+&lt;p&gt;我们刚刚假设我们的高亮插件放在static/highlight下，那么path/to应该换成highlight&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/highlight/styles/default.css&amp;quot;&amp;gt;
 &amp;lt;script src=&amp;quot;/highlight/highlight.pack.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;

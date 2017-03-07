@@ -102,7 +102,6 @@
 
 			// Methods.
 				$this._hide = function(event) {
-
 					// Already hidden? Bail.
 						if (!config.target.hasClass(config.visibleClass))
 							return;
@@ -179,7 +178,7 @@
 
 			// Event: Touch stuff.
 				$this.on('touchstart', function(event) {
-
+					
 					$this.touchPosX = event.originalEvent.touches[0].pageX;
 					$this.touchPosY = event.originalEvent.touches[0].pageY;
 
@@ -267,7 +266,13 @@
 		// Body.
 
 			// Event: Hide panel on body click/tap.
-				$body.on('click touchend', function(event) {
+				$body.on('click touchstart', function(event) {
+					// $this._hide(event);
+
+				});
+
+				$('#wrapper').on('click touchstart', function(event) {
+					
 					$this._hide(event);
 				});
 
